@@ -21,6 +21,10 @@ namespace ConsoleApp1
             Console.Write('\n');
             string inString = "test test2 test test2 test test2";
             Console.WriteLine(CapitalizeWord(inString));
+
+            Abbreviator ae = new Abbreviator();
+            ae.add("Ontario", "ON");
+            Console.WriteLine(ae.abbrev("Ontario"));
         }
 
         static string CapitalizeString(string s)
@@ -37,6 +41,34 @@ namespace ConsoleApp1
             TextInfo cultInfo = new CultureInfo("en-US", false).TextInfo;
             string output = cultInfo.ToTitleCase(s);
             return output;
+        }
+    }
+
+    class Abbreviator
+    {
+        private Dictionary<string, string> map;
+        public Abbreviator()
+        {
+            map = new Dictionary<string, string>();
+        }
+
+        public void add(string expand, string abbrev)
+        {
+            map.Add(expand, abbrev);
+        }
+
+        public string abbrev(string word)
+        {
+            string abbreviation;
+            // if found the key, return the abbreviation, if not, return the itself
+            if (map.TryGetValue(word, out abbreviation))
+            {
+                return abbreviation;
+            }
+            else
+            {
+                return word;
+            }
         }
     }
 }
