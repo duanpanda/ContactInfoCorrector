@@ -23,8 +23,8 @@ namespace ConsoleApp1
             Console.WriteLine(CapitalizeWord(inString));
 
             Abbreviator ae = new Abbreviator();
-            ae.add("Ontario", "ON");
-            Console.WriteLine(ae.abbrev("Ontario"));
+            ae.Add("Ontario", "ON");
+            Console.WriteLine(ae.Abbrev("Ontario"));
 
             CityProvinceCountryCorrector cc = new CityProvinceCountryCorrector();
             if (cc.LoadCityTable())
@@ -61,12 +61,12 @@ namespace ConsoleApp1
             map = new Dictionary<string, string>();
         }
 
-        public void add(string expand, string abbrev)
+        public void Add(string expand, string abbrev)
         {
             map.Add(expand, abbrev);
         }
 
-        public string abbrev(string word)
+        public string Abbrev(string word)
         {
             string abbreviation;
             // if found the key, return the abbreviation, if not, return the itself
