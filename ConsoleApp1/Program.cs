@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Data;       //To have the data objects like data tables/sets
+using System.IO;
 
 namespace ConsoleApp1
 {
@@ -29,6 +31,24 @@ namespace ConsoleApp1
 
             contacts[0].print();
             contacts[1].print();
+
+            var contacts2 = from l in File.ReadAllLines(@"C:/Users/duanp/Desktop/enterprise_apps_interview_data.csv").Skip(1)
+                        let x = l.Split(new[] { ',' })
+                        select new ContactRecord
+                        {
+                            FirstName = x[2],
+                            LastName = x[3],
+                            Street = x[7],
+                            City = x[4],
+                            Province = x[6],
+                            PostalCode = x[8],
+                            Country = x[5]
+                        };
+
+            // print the first record
+            IEnumerator<ContactRecord> enumerator = contacts2.GetEnumerator();
+            enumerator.MoveNext();
+            enumerator.Current.print();
         }
     }
 
@@ -41,6 +61,8 @@ namespace ConsoleApp1
         private string province; // or state
         private string postalCode;
         private string country;
+
+        public ContactRecord() { }
 
         public ContactRecord(string firstname, string lastname, string street,
             string city, string province, string postalCode, string country)
@@ -92,6 +114,7 @@ namespace ConsoleApp1
 
         public void print()
         {
+            Console.WriteLine("---------------");
             Console.WriteLine(firstName + " " + lastName);
             Console.WriteLine(street);
             Console.WriteLine(city + ", " + province + " " + postalCode);
