@@ -53,19 +53,12 @@ namespace ConsoleApp1
             List<ContactRecord> contactList = contacts2.ToList();
             corrector.ApplyRules(contactList); // contactList is changed, but contacts2 is not.
 
-            StreamWriter writer = new StreamWriter("C:/Users/duanp/Desktop/out.csv");
+            CsvFileWriter writer = new CsvFileWriter("C:/Users/duanp/Desktop/out.csv");
             foreach (ContactRecord c in contactList)
             {
-                string[] columns = c.GetFields();
-                int i;
-                // TODO: BUG: Quotes are NOT handled!
-                for (i = 0; i <= columns.Length - 2; ++i)
-                {
-                    writer.Write(columns[i] + ",");
-                }
-                writer.Write(columns[i] + "\n");
+                List<string> columns = c.GetFields().ToList();
+                writer.WriteRow(columns);
             }
-            writer.Close();
         }
     }
 
