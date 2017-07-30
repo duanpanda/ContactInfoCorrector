@@ -10,15 +10,6 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(CapitalizeString("samuel"));
-            Console.WriteLine(CapitalizeString("julia"));
-            Console.WriteLine(CapitalizeString("john smith"));
-            string[] words = "john smith".Split(' ');
-            foreach (string s in words)
-            {
-                Console.Write(CapitalizeString(s) + ' ');
-            }
-            Console.Write('\n');
             string inString = "test test2 test test2 test test2";
             Console.WriteLine(CapitalizeWord(inString));
 
@@ -37,11 +28,12 @@ namespace ConsoleApp1
 
             Console.WriteLine("------------------------------------------------------");
             List<ContactRecord> contacts = new List<ContactRecord>();
-            contacts.Add(new ContactRecord("Craig", "KielBUrger", "233 carlton St.",
+             contacts.Add(new ContactRecord("Craig", "KielBUrger", "233 carlton St.",
                 "TORONTO", "Ontario", "M3K 1L3", "USA"));
             contacts[0].print();
-            contacts[0].FirstName = CapitalizeString(contacts[0].FirstName);
-            contacts[0].LastName = CapitalizeString(contacts[0].LastName);
+            ContactInfoCorrector corrector = new ContactInfoCorrector();
+            corrector.AddRule(new CapitalizeName());
+            corrector.ApplyRules(contacts[0]);
             contacts[0].Street = CapitalizeWord(contacts[0].Street);
             string[] o = new string[3];
             o[0] = contacts[0].City;
@@ -52,15 +44,6 @@ namespace ConsoleApp1
             contacts[0].Province = r[1];
             contacts[0].Country = r[2];
             contacts[0].print();
-        }
-
-        static string CapitalizeString(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-            {
-                return string.Empty;
-            }
-            return char.ToUpper(s[0]) + s.Substring(1).ToLower();
         }
 
         static string CapitalizeWord(string s)
@@ -196,6 +179,47 @@ namespace ConsoleApp1
             Console.WriteLine(street);
             Console.WriteLine(city + ", " + province + " " + postalCode);
             Console.WriteLine(country);
+        }
+    }
+
+    abstract class CorrectorRule
+    {
+        public abstract void ApplyOn(ContactRecord contact);
+    }
+
+    class ContactInfoCorrector
+    {
+        private List<CorrectorRule> rules = new List<CorrectorRule>();
+
+        public void AddRule(CorrectorRule r)
+        {
+            rules.Add(r);
+        }
+
+        public void ApplyRules(ContactRecord contact)
+        {
+            foreach (CorrectorRule rule in rules)
+            {
+                rule.ApplyOn(contact);
+            }
+        }
+    }
+
+    class CapitalizeName : CorrectorRule
+    {
+        public override void ApplyOn(ContactRecord contact)
+        {
+            contact.FirstName = CapitalizeString(contact.FirstName);
+            contact.LastName = CapitalizeString(contact.LastName);
+        }
+
+        static string CapitalizeString(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            return char.ToUpper(s[0]) + s.Substring(1).ToLower();
         }
     }
 }
