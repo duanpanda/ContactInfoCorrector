@@ -34,6 +34,24 @@ namespace ConsoleApp1
                 Console.WriteLine(record[0] + ", " + record[1] + ", " + record[2] + " ==> " +
                     result[0] + ", " + result[1] + ", " + result[2]);
             }
+
+            Console.WriteLine("------------------------------------------------------");
+            List<ContactRecord> contacts = new List<ContactRecord>();
+            contacts.Add(new ContactRecord("Craig", "KielBUrger", "233 carlton St.",
+                "TORONTO", "Ontario", "M3K 1L3", "USA"));
+            contacts[0].print();
+            contacts[0].FirstName = CapitalizeString(contacts[0].FirstName);
+            contacts[0].LastName = CapitalizeString(contacts[0].LastName);
+            contacts[0].Street = CapitalizeWord(contacts[0].Street);
+            string[] o = new string[3];
+            o[0] = contacts[0].City;
+            o[1] = contacts[0].Province;
+            o[2] = contacts[0].Country;
+            string[] r = cc.CorrectCityAddress(o);
+            contacts[0].City = r[0];
+            contacts[0].Province = r[1];
+            contacts[0].Country = r[2];
+            contacts[0].print();
         }
 
         static string CapitalizeString(string s)
@@ -42,7 +60,7 @@ namespace ConsoleApp1
             {
                 return string.Empty;
             }
-            return char.ToUpper(s[0]) + s.Substring(1);
+            return char.ToUpper(s[0]) + s.Substring(1).ToLower();
         }
 
         static string CapitalizeWord(string s)
@@ -103,13 +121,81 @@ namespace ConsoleApp1
         {
             for (int i = 0; i < cityTable.Count; ++i)
             {
-                if (String.Compare(cityTable[i][0], cityProvinceCountry[0]) == 0)
+                // string comparison (ignore case)
+                if (String.Compare(cityTable[i][0], cityProvinceCountry[0], true) == 0)
                 {
                     return cityTable[i];
                 }
             }
             // not found, return the original
             return cityProvinceCountry;
+        }
+    }
+
+    class ContactRecord
+    {
+        private string firstName;
+        private string lastName;
+        private string street;
+        private string city;
+        private string province; // or state
+        private string postalCode;
+        private string country;
+
+        public ContactRecord(string firstname, string lastname, string street,
+            string city, string province, string postalCode, string country)
+        {
+            firstName = firstname;
+            lastName = lastname;
+            this.street = street;
+            this.city = city;
+            this.province = province;
+            this.postalCode = postalCode;
+            this.country = country;
+        }
+
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value; }
+        }
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value; }
+        }
+        public string Street
+        {
+            get { return street; }
+            set { street = value; }
+        }
+        public string City
+        {
+            get { return city; }
+            set { city = value; }
+        }
+        public string Province
+        {
+            get { return province; }
+            set { province = value; }
+        }
+        public string PostalCode
+        {
+            get { return postalCode; }
+            set { postalCode = value; }
+        }
+        public string Country
+        {
+            get { return country; }
+            set { country = value; }
+        }
+
+        public void print()
+        {
+            Console.WriteLine(firstName + " " + lastName);
+            Console.WriteLine(street);
+            Console.WriteLine(city + ", " + province + " " + postalCode);
+            Console.WriteLine(country);
         }
     }
 }
