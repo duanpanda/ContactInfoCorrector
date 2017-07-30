@@ -49,6 +49,23 @@ namespace ConsoleApp1
             IEnumerator<ContactRecord> enumerator = contacts2.GetEnumerator();
             enumerator.MoveNext();
             enumerator.Current.print();
+
+            List<ContactRecord> contactList = contacts2.ToList();
+            corrector.ApplyRules(contactList); // contactList is changed, but contacts2 is not.
+
+            StreamWriter writer = new StreamWriter("C:/Users/duanp/Desktop/out.csv");
+            foreach (ContactRecord c in contactList)
+            {
+                string[] columns = c.GetFields();
+                int i;
+                // TODO: BUG: Quotes are NOT handled!
+                for (i = 0; i <= columns.Length - 2; ++i)
+                {
+                    writer.Write(columns[i] + ",");
+                }
+                writer.Write(columns[i] + "\n");
+            }
+            writer.Close();
         }
     }
 
@@ -119,6 +136,19 @@ namespace ConsoleApp1
             Console.WriteLine(street);
             Console.WriteLine(city + ", " + province + " " + postalCode);
             Console.WriteLine(country);
+        }
+
+        public string[] GetFields()
+        {
+            string[] fields = new string[7];
+            fields[0] = firstName;
+            fields[1] = lastName;
+            fields[2] = street;
+            fields[3] = city;
+            fields[4] = province;
+            fields[5] = postalCode;
+            fields[6] = country;
+            return fields;
         }
     }
 
