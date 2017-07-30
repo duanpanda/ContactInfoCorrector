@@ -10,15 +10,10 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Abbreviator ae = new Abbreviator();
-            ae.Add("Ontario", "ON");
-            Console.WriteLine(ae.Abbrev("Ontario"));
-
-            Console.WriteLine("------------------------------------------------------");
             List<ContactRecord> contacts = new List<ContactRecord>();
-             contacts.Add(new ContactRecord("Craig", "KielBUrger", "233 carlton St.",
+            contacts.Add(new ContactRecord("Craig", "KielBUrger", "233 carlton St.",
                 "TORONTO", "Ontario", "M3K 1L3", "USA"));
-            contacts[0].print();
+            contacts.Add(new ContactRecord("ryan", "dUaN", "14 torekqd street", "Toronto", "Nova Scotia", "M3L 2KW", "China"));
 
             ContactInfoCorrector corrector = new ContactInfoCorrector();
             corrector.AddRule(new CapitalizeName());
@@ -26,37 +21,14 @@ namespace ConsoleApp1
             CityProvinceCountryCorrector cc = new CityProvinceCountryCorrector();
             cc.LoadCityTable();
             corrector.AddRule(cc);
-            corrector.ApplyRules(contacts[0]);
+            Expander expander = new Expander();
+            expander.Add("St.", "Street");
+            corrector.AddRule(expander);
+
+            corrector.ApplyRules(contacts);
 
             contacts[0].print();
-        }
-    }
-
-    class Abbreviator
-    {
-        private Dictionary<string, string> map;
-        public Abbreviator()
-        {
-            map = new Dictionary<string, string>();
-        }
-
-        public void Add(string expand, string abbrev)
-        {
-            map.Add(expand, abbrev);
-        }
-
-        public string Abbrev(string word)
-        {
-            string abbreviation;
-            // if found the key, return the abbreviation, if not, return the itself
-            if (map.TryGetValue(word, out abbreviation))
-            {
-                return abbreviation;
-            }
-            else
-            {
-                return word;
-            }
+            contacts[1].print();
         }
     }
 
@@ -141,11 +113,14 @@ namespace ConsoleApp1
             rules.Add(r);
         }
 
-        public void ApplyRules(ContactRecord contact)
+        public void ApplyRules(List<ContactRecord> contacts)
         {
-            foreach (CorrectorRule rule in rules)
+            foreach (ContactRecord contact in contacts)
             {
-                rule.ApplyOn(contact);
+                foreach (CorrectorRule rule in rules)
+                {
+                    rule.ApplyOn(contact);
+                }
             }
         }
     }
@@ -224,6 +199,46 @@ namespace ConsoleApp1
             }
             // not found, return the original
             return cityProvinceCountry;
+        }
+    }
+
+    class Expander : CorrectorRule
+    {
+        private Dictionary<string, string> map;
+
+        public override void ApplyOn(ContactRecord contact)
+        {
+            string[] words = contact.Street.Split(' ');
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (string word in words)
+            {
+                stringBuilder.Append(Expand(word) + ' ');
+            }
+            contact.Street = stringBuilder.ToString().TrimEnd(); ;
+        }
+
+        public Expander()
+        {
+            map = new Dictionary<string, string>();
+        }
+
+        public void Add(string word, string expandTo)
+        {
+            map.Add(word, expandTo);
+        }
+
+        string Expand(string word)
+        {
+            string expansion;
+            // if found the key, return the abbreviation, if not, return the itself
+            if (map.TryGetValue(word, out expansion))
+            {
+                return expansion;
+            }
+            else
+            {
+                return word;
+            }
         }
     }
 }
