@@ -25,6 +25,15 @@ namespace ConsoleApp1
             Abbreviator ae = new Abbreviator();
             ae.add("Ontario", "ON");
             Console.WriteLine(ae.abbrev("Ontario"));
+
+            CityProvinceCountryCorrector cc = new CityProvinceCountryCorrector();
+            if (cc.LoadCityTable())
+            {
+                string[] record = { "Toronto", "Nova Scotia", "China" };
+                string[] result = cc.CorrectCityAddress(record);
+                Console.WriteLine(record[0] + ", " + record[1] + ", " + record[2] + " ==> " +
+                    result[0] + ", " + result[1] + ", " + result[2]);
+            }
         }
 
         static string CapitalizeString(string s)
@@ -69,6 +78,38 @@ namespace ConsoleApp1
             {
                 return word;
             }
+        }
+    }
+
+    class CityProvinceCountryCorrector
+    {
+        private List<string[]> cityTable;
+
+        public Boolean LoadCityTable()
+        {
+            cityTable = new List<string[]>();
+
+            string[] city = new string[3];
+            city[0] = "Toronto";
+            city[1] = "ON";
+            city[2] = "Canada";
+
+            cityTable.Add(city);
+            return true;
+        }
+
+        // return 
+        public string[] CorrectCityAddress(string[] cityProvinceCountry)
+        {
+            for (int i = 0; i < cityTable.Count; ++i)
+            {
+                if (String.Compare(cityTable[i][0], cityProvinceCountry[0]) == 0)
+                {
+                    return cityTable[i];
+                }
+            }
+            // not found, return the original
+            return cityProvinceCountry;
         }
     }
 }
