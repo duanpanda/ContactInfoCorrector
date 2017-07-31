@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ConsoleApp1
 {
@@ -142,6 +143,21 @@ namespace ConsoleApp1
             {
                 return word;
             }
+        }
+    }
+
+    class StreetNameCleaner : CorrectorRule
+    {
+        public override void ApplyOn(ContactRecord contact)
+        {
+            contact.Street = RemoveRedundantComma(contact.Street);
+        }
+
+        static string RemoveRedundantComma(string s)
+        {
+            string pattern = ",\\s*(Street|St\\.|Road|Rd\\.)";
+            string replacement = " $1";
+            return Regex.Replace(s, pattern, replacement);
         }
     }
 }
