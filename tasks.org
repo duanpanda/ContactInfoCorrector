@@ -3,6 +3,11 @@
   - Ensure a space in Canadian postal codes
   - UPPERCASE
 * TODO Fuzzy matching of city name, give suggestions
+line 138: JonquiÃ¨re
+line 383: La CaÃ±ada Flintridge
+line 1173: ShÃ©diac
+line 1488: QuÃ©bec
+line 1677: Trois-RiviÃ¨res
 * TODO Postal Code Locale
 * TODO Province abbreviation
 * DONE capitalize first name and last name
@@ -10,6 +15,7 @@
 * DONE expand keywords in street
 * DONE use city-province-country mapping to correct city, province and country fields
 * TODO Complete city-province-country list
+* TODO "N/A" city
 
 * observations
 ** Name
