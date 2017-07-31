@@ -1,0 +1,57 @@
+* TODO
+** Fuzzy matching of city name, give suggestions
+** Postal Code formatter
+   - Ensure a space in Canadian postal codes
+   - UPPERCASE
+** Postal Code Locale
+** Remove "," before "Street" and "Road"
+** Province abbreviation
+** Complete city-province-country list
+
+* DONE
+
+* observations
+** Name
+capitalize (keep encoding, e.g. UTF8)
+
+** street
+capitalize each word
+expand abbreviations
+
+** city
+capitalize
+
+** province
+abbreviate
+
+* city-province-country correction
+use mapping
+
+* solution 1: rule-based column batch operation
+dataframe = import(xlsx)
+df = dataframe.select(first_name, last_name, street, city, province, country, postal_code)
+name_correcter = new NameCorrector()
+name_correcter.add_rule(rule1)
+name_correcter.add_rule(rule2)
+df.first_name = name_correcter.apply_rules(df.first_name) // map or column batch operation
+df.last_name = name_correcter.apply_rule(df.last_name)
+address_correcter = new AddressCorrector()
+address_correcter.add_rule(rule1)
+address_correcter.add_rule(rule2)
+Address orig_addr = new Address(df) // street, city, province, country, postal_code
+Address new_addr = address_correcter.apply_rule(orig_addr)
+df.street = new_addr.street
+df.city = new_addr.city
+...
+
+* solution 2: loop and modify the dataframe in place
+for each record
+  first_name.capitalize
+  last_name.capitalize
+  street.capitalize
+  make_addr_consistent(city, province, country, postal_code) // according to table
+
+* decouple these things:
+ - data source: xlsx, salesforce.com standard object, database => dataframe
+ - output: xlsx, force.com object => dataframe
+ - correctors (computation engine): it can modify the dataframe in place or do not modify anything but return new values (pure and reentrant functions, good for parralell computing)

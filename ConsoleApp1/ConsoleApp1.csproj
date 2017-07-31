@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContactInfoCorrector.cs" />
+    <Compile Include="ContactRecord.cs" />
+    <Compile Include="CorrectorRule.cs" />
     <Compile Include="CsvTool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
