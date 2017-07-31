@@ -1,3 +1,4 @@
+-*- org -*-
 * TODO Complete city-province-country list
 load from a text file
 ** TODO How to make the city list? (pseudo code) (R or Python is good at this.)
