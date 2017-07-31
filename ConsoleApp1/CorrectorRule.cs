@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 
 namespace ConsoleApp1
@@ -8,6 +7,26 @@ namespace ConsoleApp1
     abstract class CorrectorRule
     {
         public abstract void ApplyOn(ContactRecord contact);
+
+        public static string CapitalizeString(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            return char.ToUpper(s[0]) + s.Substring(1).ToLower();
+        }
+
+        public static string CapitalizeWord(string s)
+        {
+            string[] words = s.Split(' ');
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (string word in words)
+            {
+                stringBuilder.Append(CapitalizeString(word) + ' ');
+            }
+            return stringBuilder.ToString().TrimEnd(); ;
+        }
     }
 
     class CapitalizeName : CorrectorRule
@@ -17,15 +36,6 @@ namespace ConsoleApp1
             contact.FirstName = CapitalizeString(contact.FirstName);
             contact.LastName = CapitalizeString(contact.LastName);
         }
-
-        static string CapitalizeString(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-            {
-                return string.Empty;
-            }
-            return char.ToUpper(s[0]) + s.Substring(1).ToLower();
-        }
     }
 
     class CapitalizeStreet : CorrectorRule
@@ -34,13 +44,6 @@ namespace ConsoleApp1
         {
             contact.Street = CapitalizeWord(contact.Street);
         }
-
-        static string CapitalizeWord(string s)
-        {
-            TextInfo cultInfo = new CultureInfo("en-US", false).TextInfo;
-            string output = cultInfo.ToTitleCase(s);
-            return output;
-        }
     }
 
     class CapitalizeCity : CorrectorRule
@@ -48,13 +51,6 @@ namespace ConsoleApp1
         public override void ApplyOn(ContactRecord contact)
         {
             contact.City = CapitalizeWord(contact.City);
-        }
-
-        static string CapitalizeWord(string s)
-        {
-            TextInfo cultInfo = new CultureInfo("en-US", false).TextInfo;
-            string output = cultInfo.ToTitleCase(s);
-            return output;
         }
     }
 
