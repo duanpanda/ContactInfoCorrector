@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>tasks</title>
+<!-- 2017-07-31 Mon 12:08 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Ryan Duan" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">tasks</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. <span class="done DONE">DONE</span> capitalize first name and last name</a></li>
+<li><a href="#sec-2">2. <span class="done DONE">DONE</span> capitalize city</a></li>
+<li><a href="#sec-3">3. <span class="done DONE">DONE</span> expand keywords in street</a></li>
+<li><a href="#sec-4">4. <span class="done DONE">DONE</span> use city-province-country mapping to correct city, province and country fields</a></li>
+<li><a href="#sec-5">5. <span class="done DONE">DONE</span> Remove "," before "Street" and "Road"</a></li>
+<li><a href="#sec-6">6. <span class="done DONE">DONE</span> Postal Code formatter</a></li>
+<li><a href="#sec-7">7. <span class="todo TODO">TODO</span> Complete city-province-country list</a>
+<ul>
+<li><a href="#sec-7-1">7.1. <span class="todo TODO">TODO</span> How to make the city list? (pseudo code) (R or Python is good at this.)</a></li>
+<li><a href="#sec-7-2">7.2. <span class="todo TODO">TODO</span> How to handle the case where two cities have the same name?</a></li>
+<li><a href="#sec-7-3">7.3. <span class="todo TODO">TODO</span> How to handle the missing data where only one field is missing?</a></li>
+<li><a href="#sec-7-4">7.4. <span class="done DONE">DONE</span> How to handle the missing data where two fields are missing?</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8. <span class="todo TODO">TODO</span> Capitalize words in street has a bug: "P.O." =&gt; "P.o."</a></li>
+<li><a href="#sec-9">9. <span class="todo TODO">TODO</span> Fuzzy matching of city name, give suggestions</a>
+<ul>
+<li><a href="#sec-9-1">9.1. <span class="done DONE">DONE</span> Problem data  =&gt; No, the invalid chars are introduced by the CsvFileReader due to text ENCODING problem!</a></li>
+<li><a href="#sec-9-2">9.2. Approximate String Matching</a></li>
+</ul>
+</li>
+<li><a href="#sec-10">10. <span class="todo TODO">TODO</span> Province abbreviation</a></li>
+<li><a href="#sec-11">11. <span class="todo TODO">TODO</span> read from XLSX file</a>
+<ul>
+<li><a href="#sec-11-1">11.1. <span class="done DONE">DONE</span> Try ADO.NET OLEDB solutoin =&gt; [failed]</a></li>
+</ul>
+</li>
+<li><a href="#sec-12">12. <span class="todo TODO">TODO</span> Use System.Data.DataTable to load the data frame</a></li>
+<li><a href="#sec-13">13. <span class="todo TODO">TODO</span> Load data table from salesforce.com ?</a></li>
+<li><a href="#sec-14">14. <span class="todo TODO">TODO</span> "N/A" city</a></li>
+<li><a href="#sec-15">15. <span class="todo TODO">TODO</span> Postal Code Locale</a></li>
+<li><a href="#sec-16">16. <span class="todo TODO">TODO</span> Deploy data file in "Debug" or "Release" folder from "data" folder when building</a></li>
+<li><a href="#sec-17">17. observations</a>
+<ul>
+<li><a href="#sec-17-1">17.1. Name</a></li>
+<li><a href="#sec-17-2">17.2. street</a></li>
+<li><a href="#sec-17-3">17.3. city</a></li>
+<li><a href="#sec-17-4">17.4. province</a></li>
+<li><a href="#sec-17-5">17.5. city-province-country correction</a></li>
+</ul>
+</li>
+<li><a href="#sec-18">18. drafts</a>
+<ul>
+<li><a href="#sec-18-1">18.1. solution 1: rule-based column batch operation</a></li>
+<li><a href="#sec-18-2">18.2. solution 2: loop and modify the dataframe in place</a></li>
+<li><a href="#sec-18-3">18.3. decouple these things:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+-*- org -*-
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> <span class="done DONE">DONE</span> capitalize first name and last name</h2>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> <span class="done DONE">DONE</span> capitalize city</h2>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> <span class="done DONE">DONE</span> expand keywords in street</h2>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> <span class="done DONE">DONE</span> use city-province-country mapping to correct city, province and country fields</h2>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> <span class="done DONE">DONE</span> Remove "," before "Street" and "Road"</h2>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> <span class="done DONE">DONE</span> Postal Code formatter</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>Ensure a space in Canadian postal codes
+</li>
+<li>UPPERCASE
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> <span class="todo TODO">TODO</span> Complete city-province-country list</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+load from a text file
+</p>
+</div>
+
+<div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> <span class="todo TODO">TODO</span> How to make the city list? (pseudo code) (R or Python is good at this.)</h3>
+<div class="outline-text-3" id="text-7-1">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #4eee94;">dataframe</span> = read_xlsx(xlsx_file, column_names = [...], columns_as_string)
+<span style="color: #4eee94;">projection</span> = dataframe.select([<span style="color: #deb887;">"city"</span>, <span style="color: #deb887;">"province"</span>, <span style="color: #deb887;">"country"</span>])
+<span style="color: #4eee94;">good_rows</span> = projection.remove_rows(row =&gt; row[<span style="color: #deb887;">"city"</span>] == String.Empty ||
+        row[<span style="color: #deb887;">"city"</span>] == <span style="color: #deb887;">"/^[^a-zA-Z].*$/"</span>) // (blank) <span style="color: #00bfff;">and</span> <span style="color: #deb887;">"-"</span>
+<span style="color: #4eee94;">good_rows</span> = good_rows.sort(ascending)
+expand_province_name(good_rows[<span style="color: #deb887;">"province"</span>]) // using province abbrev table
+expand_country_name(good_rows[<span style="color: #deb887;">"country"</span>]) // using country abbrev table
+<span style="color: #4eee94;">good_rows</span> = good_rows.unique()
+<span style="color: #7f7f7f;"># </span><span style="color: #7f7f7f;">manually correct the remaining errors</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> <span class="todo TODO">TODO</span> How to handle the case where two cities have the same name?</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+consider the second matching: province
+</p>
+
+<p>
+consider the third matching: country
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> <span class="todo TODO">TODO</span> How to handle the missing data where only one field is missing?</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+Infer and auto-complete the missing field from the other two fields.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4" class="outline-3">
+<h3 id="sec-7-4"><span class="section-number-3">7.4</span> <span class="done DONE">DONE</span> How to handle the missing data where two fields are missing?</h3>
+<div class="outline-text-3" id="text-7-4">
+<p>
+Do not modify anything.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> <span class="todo TODO">TODO</span> Capitalize words in street has a bug: "P.O." =&gt; "P.o."</h2>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> <span class="todo TODO">TODO</span> Fuzzy matching of city name, give suggestions</h2>
+<div class="outline-text-2" id="text-9">
+</div><div id="outline-container-sec-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> <span class="done DONE">DONE</span> Problem data  =&gt; No, the invalid chars are introduced by the CsvFileReader due to text ENCODING problem!</h3>
+<div class="outline-text-3" id="text-9-1">
+<pre class="example">
+line 138: JonquiÃ¨re =&gt; Jonquière, Québec
+line 383: La CaÃ±ada Flintridge =&gt; La Cañada Flintridge, California
+line 1173: ShÃ©diac =&gt; Shediac, New Brunswick
+line 1488: QuÃ©bec =&gt; Québec
+line 1677: Trois-RiviÃ¨res =&gt; Trois-Rivières, Québec
+</pre>
+<p>
+==&gt; Solution: System.Text.Encoding.UTF8
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-9-2" class="outline-3">
+<h3 id="sec-9-2"><span class="section-number-3">9.2</span> Approximate String Matching</h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+<a href="https://en.wikipedia.org/wiki/Approximate_string_matching">https://en.wikipedia.org/wiki/Approximate_string_matching</a>
+</p>
+
+<p>
+<a href="https://fuzzystringmatching.codeplex.com/SourceControl/latest#WpfApplication4/FuzzyString/FuzzyString.cs">https://fuzzystringmatching.codeplex.com/SourceControl/latest#WpfApplication4/FuzzyString/FuzzyString.cs</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> <span class="todo TODO">TODO</span> Province abbreviation</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Expand the province name in the city-province-country list, and abbreviate it for the final output.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> <span class="todo TODO">TODO</span> read from XLSX file</h2>
+<div class="outline-text-2" id="text-11">
+</div><div id="outline-container-sec-11-1" class="outline-3">
+<h3 id="sec-11-1"><span class="section-number-3">11.1</span> <span class="done DONE">DONE</span> Try ADO.NET OLEDB solutoin =&gt; [failed]</h3>
+<div class="outline-text-3" id="text-11-1">
+<pre class="example">
+Microsoft.ACE.OLEDB.12.0 provider is not registered
+Microsoft.ACE.OLEDB.14.0 provider is not registered
+Microsoft.ACE.OLEDB.15.0 provider is not registered
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> <span class="todo TODO">TODO</span> Use System.Data.DataTable to load the data frame</h2>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> <span class="todo TODO">TODO</span> Load data table from salesforce.com ?</h2>
+</div>
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> <span class="todo TODO">TODO</span> "N/A" city</h2>
+</div>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> <span class="todo TODO">TODO</span> Postal Code Locale</h2>
+</div>
+
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> <span class="todo TODO">TODO</span> Deploy data file in "Debug" or "Release" folder from "data" folder when building</h2>
+</div>
+
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> observations</h2>
+<div class="outline-text-2" id="text-17">
+</div><div id="outline-container-sec-17-1" class="outline-3">
+<h3 id="sec-17-1"><span class="section-number-3">17.1</span> Name</h3>
+<div class="outline-text-3" id="text-17-1">
+<p>
+capitalize (keep encoding, e.g. UTF8)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-17-2" class="outline-3">
+<h3 id="sec-17-2"><span class="section-number-3">17.2</span> street</h3>
+<div class="outline-text-3" id="text-17-2">
+<p>
+capitalize each word
+</p>
+
+<p>
+expand abbreviations
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-17-3" class="outline-3">
+<h3 id="sec-17-3"><span class="section-number-3">17.3</span> city</h3>
+<div class="outline-text-3" id="text-17-3">
+<p>
+capitalize
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-17-4" class="outline-3">
+<h3 id="sec-17-4"><span class="section-number-3">17.4</span> province</h3>
+<div class="outline-text-3" id="text-17-4">
+<p>
+abbreviate
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-17-5" class="outline-3">
+<h3 id="sec-17-5"><span class="section-number-3">17.5</span> city-province-country correction</h3>
+<div class="outline-text-3" id="text-17-5">
+<p>
+use mapping
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> drafts</h2>
+<div class="outline-text-2" id="text-18">
+</div><div id="outline-container-sec-18-1" class="outline-3">
+<h3 id="sec-18-1"><span class="section-number-3">18.1</span> solution 1: rule-based column batch operation</h3>
+<div class="outline-text-3" id="text-18-1">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #4eee94;">dataframe</span> = <span style="color: #00bfff;">import</span>(xlsx)
+<span style="color: #4eee94;">df</span> = dataframe.select(first_name, last_name, street, city, province, country, postal_code)
+<span style="color: #4eee94;">name_correcter</span> = new NameCorrector()
+name_correcter.add_rule(rule1)
+name_correcter.add_rule(rule2)
+<span style="color: #4eee94;">df.first_name</span> = name_correcter.apply_rules(df.first_name) // <span style="color: #f08080;">map</span> <span style="color: #00bfff;">or</span> column batch operation
+<span style="color: #4eee94;">df.last_name</span> = name_correcter.apply_rule(df.last_name)
+<span style="color: #4eee94;">address_correcter</span> = new AddressCorrector()
+address_correcter.add_rule(rule1)
+address_correcter.add_rule(rule2)
+Address <span style="color: #4eee94;">orig_addr</span> = new Address(df) // street, city, province, country, postal_code
+Address <span style="color: #4eee94;">new_addr</span> = address_correcter.apply_rule(orig_addr)
+<span style="color: #4eee94;">df.street</span> = new_addr.street
+<span style="color: #4eee94;">df.city</span> = new_addr.city
+...
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-18-2" class="outline-3">
+<h3 id="sec-18-2"><span class="section-number-3">18.2</span> solution 2: loop and modify the dataframe in place</h3>
+<div class="outline-text-3" id="text-18-2">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #00bfff;">for</span> each record
+  first_name.capitalize
+  last_name.capitalize
+  street.capitalize
+  make_addr_consistent(city, province, country, postal_code) // according to table
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-18-3" class="outline-3">
+<h3 id="sec-18-3"><span class="section-number-3">18.3</span> decouple these things:</h3>
+<div class="outline-text-3" id="text-18-3">
+<ul class="org-ul">
+<li>data source: xlsx, salesforce.com standard object, database =&gt; dataframe
+</li>
+<li>output: xlsx, force.com object =&gt; dataframe
+</li>
+<li>correctors (computation engine): it can modify the dataframe in place or do not modify anything but return new values (pure and reentrant functions, good for parralell computing)
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Ryan Duan</p>
+<p class="date">Created: 2017-07-31 Mon 12:08</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

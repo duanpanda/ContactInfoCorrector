@@ -1,54 +1,83 @@
 -*- org -*-
+#+OPTIONS: ^:nil
+
+* DONE capitalize first name and last name
+
+* DONE capitalize city
+
+* DONE expand keywords in street
+
+* DONE use city-province-country mapping to correct city, province and country fields
+
+* DONE Remove "," before "Street" and "Road"
+
+* DONE Postal Code formatter
+  - Ensure a space in Canadian postal codes
+  - UPPERCASE
 * TODO Complete city-province-country list
 load from a text file
+
 ** TODO How to make the city list? (pseudo code) (R or Python is good at this.)
-dataframe = read_xlsx(xlsx_file, column_names = [...], columns_as_string)
-projection = dataframe.select(["city", "province", "country"])
-good_rows = projection.remove_rows(row => row["city"] == String.Empty ||
-        row["city"] == "/^[^a-zA-Z].*$/") // (blank) and "-"
-good_rows = good_rows.sort(ascending)
-expand_province_name(good_rows["province"]) // using province abbrev table
-expand_country_name(good_rows["country"]) // using country abbrev table
-good_rows = good_rows.unique()
-// manually correct the remaining errors
+#+BEGIN_SRC python
+  dataframe = read_xlsx(xlsx_file, column_names = [...], columns_as_string)
+  projection = dataframe.select(["city", "province", "country"])
+  good_rows = projection.remove_rows(row => row["city"] == String.Empty ||
+          row["city"] == "/^[^a-zA-Z].*$/") // (blank) and "-"
+  good_rows = good_rows.sort(ascending)
+  expand_province_name(good_rows["province"]) // using province abbrev table
+  expand_country_name(good_rows["country"]) // using country abbrev table
+  good_rows = good_rows.unique()
+  # manually correct the remaining errors
+#+END_SRC
+
 ** TODO How to handle the case where two cities have the same name?
 consider the second matching: province
+
 consider the third matching: country
+
 ** TODO How to handle the missing data where only one field is missing?
 Infer and auto-complete the missing field from the other two fields.
+
 ** DONE How to handle the missing data where two fields are missing?
 Do not modify anything.
+
 * TODO Capitalize words in street has a bug: "P.O." => "P.o."
+
 * TODO Fuzzy matching of city name, give suggestions
 ** DONE Problem data  => No, the invalid chars are introduced by the CsvFileReader due to text ENCODING problem!
+#+BEGIN_EXAMPLE
 line 138: JonquiÃ¨re => Jonquière, Québec
 line 383: La CaÃ±ada Flintridge => La Cañada Flintridge, California
 line 1173: ShÃ©diac => Shediac, New Brunswick
 line 1488: QuÃ©bec => Québec
 line 1677: Trois-RiviÃ¨res => Trois-Rivières, Québec
+#+END_EXAMPLE
 ==> Solution: System.Text.Encoding.UTF8
+
 ** Approximate String Matching
 https://en.wikipedia.org/wiki/Approximate_string_matching
+
 https://fuzzystringmatching.codeplex.com/SourceControl/latest#WpfApplication4/FuzzyString/FuzzyString.cs
-* DONE Remove "," before "Street" and "Road"
-* DONE Postal Code formatter
-  - Ensure a space in Canadian postal codes
-  - UPPERCASE
+
 * TODO Province abbreviation
 Expand the province name in the city-province-country list, and abbreviate it for the final output.
-* DONE capitalize first name and last name
-* DONE capitalize city
-* DONE expand keywords in street
-* DONE use city-province-country mapping to correct city, province and country fields
+
 * TODO read from XLSX file
 ** DONE Try ADO.NET OLEDB solutoin => [failed]
-Microsoft.ACE.OLEDB.12.0 provider is not registered
-Microsoft.ACE.OLEDB.14.0 provider is not registered
-Microsoft.ACE.OLEDB.15.0 provider is not registered
+#+BEGIN_EXAMPLE
+  Microsoft.ACE.OLEDB.12.0 provider is not registered
+  Microsoft.ACE.OLEDB.14.0 provider is not registered
+  Microsoft.ACE.OLEDB.15.0 provider is not registered
+#+END_EXAMPLE
+
 * TODO Use System.Data.DataTable to load the data frame
+
 * TODO Load data table from salesforce.com ?
+
 * TODO "N/A" city
+
 * TODO Postal Code Locale
+
 * TODO Deploy data file in "Debug" or "Release" folder from "data" folder when building
 
 * observations
@@ -57,6 +86,7 @@ capitalize (keep encoding, e.g. UTF8)
 
 ** street
 capitalize each word
+
 expand abbreviations
 
 ** city
@@ -70,28 +100,31 @@ use mapping
 
 * drafts
 ** solution 1: rule-based column batch operation
-dataframe = import(xlsx)
-df = dataframe.select(first_name, last_name, street, city, province, country, postal_code)
-name_correcter = new NameCorrector()
-name_correcter.add_rule(rule1)
-name_correcter.add_rule(rule2)
-df.first_name = name_correcter.apply_rules(df.first_name) // map or column batch operation
-df.last_name = name_correcter.apply_rule(df.last_name)
-address_correcter = new AddressCorrector()
-address_correcter.add_rule(rule1)
-address_correcter.add_rule(rule2)
-Address orig_addr = new Address(df) // street, city, province, country, postal_code
-Address new_addr = address_correcter.apply_rule(orig_addr)
-df.street = new_addr.street
-df.city = new_addr.city
-...
-
+#+BEGIN_SRC python
+  dataframe = import(xlsx)
+  df = dataframe.select(first_name, last_name, street, city, province, country, postal_code)
+  name_correcter = new NameCorrector()
+  name_correcter.add_rule(rule1)
+  name_correcter.add_rule(rule2)
+  df.first_name = name_correcter.apply_rules(df.first_name) // map or column batch operation
+  df.last_name = name_correcter.apply_rule(df.last_name)
+  address_correcter = new AddressCorrector()
+  address_correcter.add_rule(rule1)
+  address_correcter.add_rule(rule2)
+  Address orig_addr = new Address(df) // street, city, province, country, postal_code
+  Address new_addr = address_correcter.apply_rule(orig_addr)
+  df.street = new_addr.street
+  df.city = new_addr.city
+  ...
+#+END_SRC
 ** solution 2: loop and modify the dataframe in place
-for each record
-  first_name.capitalize
-  last_name.capitalize
-  street.capitalize
-  make_addr_consistent(city, province, country, postal_code) // according to table
+#+BEGIN_SRC python
+  for each record
+    first_name.capitalize
+    last_name.capitalize
+    street.capitalize
+    make_addr_consistent(city, province, country, postal_code) // according to table
+#+END_SRC
 
 ** decouple these things:
   - data source: xlsx, salesforce.com standard object, database => dataframe
