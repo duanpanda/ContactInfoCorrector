@@ -14,6 +14,8 @@
 * DONE Postal Code formatter
   - Ensure a space in Canadian postal codes
   - UPPERCASE
+
+* DONE Deploy data file in "Debug" or "Release" folder from "data" folder when building
 * TODO Complete city-province-country list
 load from a text file
 
@@ -77,8 +79,6 @@ Expand the province name in the city-province-country list, and abbreviate it fo
 * TODO "N/A" city
 
 * TODO Postal Code Locale
-
-* TODO Deploy data file in "Debug" or "Release" folder from "data" folder when building
 
 * observations
 ** Name
