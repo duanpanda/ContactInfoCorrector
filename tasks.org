@@ -1,14 +1,15 @@
-* TODO
-** Fuzzy matching of city name, give suggestions
-** Postal Code formatter
-   - Ensure a space in Canadian postal codes
-   - UPPERCASE
-** Postal Code Locale
-** Remove "," before "Street" and "Road"
-** Province abbreviation
-** Complete city-province-country list
-
-* DONE
+* TODO Remove "," before "Street" and "Road"
+* TODO Postal Code formatter
+  - Ensure a space in Canadian postal codes
+  - UPPERCASE
+* TODO Fuzzy matching of city name, give suggestions
+* TODO Postal Code Locale
+* TODO Province abbreviation
+* DONE capitalize first name and last name
+* DONE capitalize city
+* DONE expand keywords in street
+* DONE use city-province-country mapping to correct city, province and country fields
+* TODO Complete city-province-country list
 
 * observations
 ** Name
@@ -24,10 +25,11 @@ capitalize
 ** province
 abbreviate
 
-* city-province-country correction
+** city-province-country correction
 use mapping
 
-* solution 1: rule-based column batch operation
+* drafts
+** solution 1: rule-based column batch operation
 dataframe = import(xlsx)
 df = dataframe.select(first_name, last_name, street, city, province, country, postal_code)
 name_correcter = new NameCorrector()
@@ -44,14 +46,14 @@ df.street = new_addr.street
 df.city = new_addr.city
 ...
 
-* solution 2: loop and modify the dataframe in place
+** solution 2: loop and modify the dataframe in place
 for each record
   first_name.capitalize
   last_name.capitalize
   street.capitalize
   make_addr_consistent(city, province, country, postal_code) // according to table
 
-* decouple these things:
- - data source: xlsx, salesforce.com standard object, database => dataframe
- - output: xlsx, force.com object => dataframe
- - correctors (computation engine): it can modify the dataframe in place or do not modify anything but return new values (pure and reentrant functions, good for parralell computing)
+** decouple these things:
+  - data source: xlsx, salesforce.com standard object, database => dataframe
+  - output: xlsx, force.com object => dataframe
+  - correctors (computation engine): it can modify the dataframe in place or do not modify anything but return new values (pure and reentrant functions, good for parralell computing)
