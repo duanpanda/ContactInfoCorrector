@@ -40,6 +40,11 @@ Expand the province name in the city-province-country list, and abbreviate it fo
 * DONE capitalize city
 * DONE expand keywords in street
 * DONE use city-province-country mapping to correct city, province and country fields
+* TODO read from XLSX file
+** DONE Try ADO.NET OLEDB solutoin => [failed]
+Microsoft.ACE.OLEDB.12.0 provider is not registered
+Microsoft.ACE.OLEDB.14.0 provider is not registered
+Microsoft.ACE.OLEDB.15.0 provider is not registered
 * TODO Use System.Data.DataTable to load the data frame
 * TODO Load data table from salesforce.com ?
 * TODO "N/A" city
