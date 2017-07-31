@@ -1,21 +1,48 @@
+* TODO Complete city-province-country list
+load from a text file
+** TODO How to make the city list? (pseudo code) (R or Python is good at this.)
+dataframe = read_xlsx(xlsx_file, column_names = [...], columns_as_string)
+projection = dataframe.select(["city", "province", "country"])
+good_rows = projection.remove_rows(row => row["city"] == String.Empty ||
+        row["city"] == "/^[^a-zA-Z].*$/") // (blank) and "-"
+good_rows = good_rows.sort(ascending)
+expand_province_name(good_rows["province"]) // using province abbrev table
+expand_country_name(good_rows["country"]) // using country abbrev table
+good_rows = good_rows.unique()
+// manually correct the remaining errors
+** TODO How to handle the case where two cities have the same name?
+consider the second matching: province
+consider the third matching: country
+** TODO How to handle the missing data where only one field is missing?
+Infer and auto-complete the missing field from the other two fields.
+** DONE How to handle the missing data where two fields are missing?
+Do not modify anything.
+* TODO Capitalize words in street has a bug: "P.O." => "P.o."
+* TODO Fuzzy matching of city name, give suggestions
+** TODO Problem data  => No, the invalid chars are introduced by the CsvFileReader due to text ENCODING problem!
+line 138: JonquiÃ¨re => Jonquière, Québec
+line 383: La CaÃ±ada Flintridge => La Cañada Flintridge, California
+line 1173: ShÃ©diac => Shediac, New Brunswick
+line 1488: QuÃ©bec => Québec
+line 1677: Trois-RiviÃ¨res => Trois-Rivières, Québec
+** Approximate String Matching
+https://en.wikipedia.org/wiki/Approximate_string_matching
+https://fuzzystringmatching.codeplex.com/SourceControl/latest#WpfApplication4/FuzzyString/FuzzyString.cs
 * TODO Remove "," before "Street" and "Road"
 * TODO Postal Code formatter
   - Ensure a space in Canadian postal codes
   - UPPERCASE
-* TODO Fuzzy matching of city name, give suggestions
-line 138: JonquiÃ¨re
-line 383: La CaÃ±ada Flintridge
-line 1173: ShÃ©diac
-line 1488: QuÃ©bec
-line 1677: Trois-RiviÃ¨res
-* TODO Postal Code Locale
 * TODO Province abbreviation
+Expand the province name in the city-province-country list, and abbreviate it for the final output.
 * DONE capitalize first name and last name
 * DONE capitalize city
 * DONE expand keywords in street
 * DONE use city-province-country mapping to correct city, province and country fields
-* TODO Complete city-province-country list
+* TODO Use System.Data.DataTable to load the data frame
+* TODO Load data table from salesforce.com ?
 * TODO "N/A" city
+* TODO Postal Code Locale
+* TODO Deploy data file in "Debug" or "Release" folder from "data" folder when building
 
 * observations
 ** Name

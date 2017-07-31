@@ -74,12 +74,7 @@ namespace ConsoleApp1
         {
             cityTable = new List<string[]>();
 
-            string[] city = new string[3];
-            city[0] = "Toronto";
-            city[1] = "ON";
-            city[2] = "Canada";
-
-            cityTable.Add(city);
+            ReadFromCsvFile("city_table.csv", cityTable);
             return true;
         }
 
@@ -95,6 +90,18 @@ namespace ConsoleApp1
             }
             // not found, return the original
             return cityProvinceCountry;
+        }
+
+        private static void ReadFromCsvFile(string filePath, List<string[]> cities)
+        {
+            List<string> columns = new List<string>();
+            using (var reader = new CsvFileReader(filePath))
+            {
+                while (reader.ReadRow(columns))
+                {
+                    cities.Add(columns.ToArray());
+                }
+            }
         }
     }
 
