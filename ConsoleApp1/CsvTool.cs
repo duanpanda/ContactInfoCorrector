@@ -87,7 +87,7 @@ namespace ConsoleApp1
         public CsvFileReader(Stream stream,
             EmptyLineBehavior emptyLineBehavior = EmptyLineBehavior.NoColumns)
         {
-            Reader = new StreamReader(stream);
+            Reader = new StreamReader(stream, System.Text.Encoding.UTF8);
             EmptyLineBehavior = emptyLineBehavior;
         }
 
@@ -100,7 +100,7 @@ namespace ConsoleApp1
         public CsvFileReader(string path,
             EmptyLineBehavior emptyLineBehavior = EmptyLineBehavior.NoColumns)
         {
-            Reader = new StreamReader(path);
+            Reader = new StreamReader(path, System.Text.Encoding.UTF8);
             EmptyLineBehavior = emptyLineBehavior;
         }
 
@@ -263,7 +263,7 @@ namespace ConsoleApp1
         /// <param name="stream">The stream to write to</param>
         public CsvFileWriter(Stream stream)
         {
-            Writer = new StreamWriter(stream);
+            Writer = new StreamWriter(stream, System.Text.Encoding.UTF8);
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace ConsoleApp1
         /// <param name="path">The name of the CSV file to write to</param>
         public CsvFileWriter(string path)
         {
-            Writer = new StreamWriter(path);
+            Writer = new StreamWriter(path, false, System.Text.Encoding.UTF8);
         }
 
         /// <summary>

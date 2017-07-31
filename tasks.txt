@@ -20,12 +20,13 @@ Infer and auto-complete the missing field from the other two fields.
 Do not modify anything.
 * TODO Capitalize words in street has a bug: "P.O." => "P.o."
 * TODO Fuzzy matching of city name, give suggestions
-** TODO Problem data  => No, the invalid chars are introduced by the CsvFileReader due to text ENCODING problem!
+** DONE Problem data  => No, the invalid chars are introduced by the CsvFileReader due to text ENCODING problem!
 line 138: JonquiÃ¨re => Jonquière, Québec
 line 383: La CaÃ±ada Flintridge => La Cañada Flintridge, California
 line 1173: ShÃ©diac => Shediac, New Brunswick
 line 1488: QuÃ©bec => Québec
 line 1677: Trois-RiviÃ¨res => Trois-Rivières, Québec
+==> Solution: System.Text.Encoding.UTF8
 ** Approximate String Matching
 https://en.wikipedia.org/wiki/Approximate_string_matching
 https://fuzzystringmatching.codeplex.com/SourceControl/latest#WpfApplication4/FuzzyString/FuzzyString.cs

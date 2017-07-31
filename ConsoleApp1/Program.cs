@@ -24,8 +24,8 @@ namespace ConsoleApp1
             expander.Add("Rd.", "Road");
             corrector.AddRule(expander);
 
-            //string inputFileName = "in.csv";
-            string inputFileName = "test.csv";
+            string inputFileName = "in.csv";
+            //string inputFileName = "test.csv";
             List<ContactRecord> contactList = new List<ContactRecord>();
             ReadFromCsvFile(inputFileName, contactList);
 
