@@ -1,6 +1,6 @@
 -*- org -*-
 #+OPTIONS: ^:nil
-
+#+TITLE: Development Memo
 * DONE capitalize first name and last name
 
 * DONE capitalize city
