@@ -12,10 +12,10 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            List<ContactRecord> contacts = new List<ContactRecord>();
-            contacts.Add(new ContactRecord("Craig", "KielBUrger", "233 carlton St.",
-                "TORONTO", "Ontario", "M3K 1L3", "USA"));
-            contacts.Add(new ContactRecord("ryan", "dUaN", "14 torekqd street", "Toronto", "Nova Scotia", "M3L 2KW", "China"));
+            //List<ContactRecord> contacts = new List<ContactRecord>();
+            //contacts.Add(new ContactRecord("Craig", "KielBUrger", "233 carlton St.",
+            //    "TORONTO", "Ontario", "M3K 1L3", "USA"));
+            //contacts.Add(new ContactRecord("ryan", "dUaN", "14 torekqd street", "Toronto", "Nova Scotia", "M3L 2KW", "China"));
 
             ContactInfoCorrector corrector = new ContactInfoCorrector();
             corrector.AddRule(new CapitalizeName());
@@ -27,37 +27,64 @@ namespace ConsoleApp1
             expander.Add("St.", "Street");
             corrector.AddRule(expander);
 
-            corrector.ApplyRules(contacts);
+            //corrector.ApplyRules(contacts);
 
-            contacts[0].print();
-            contacts[1].print();
+            //contacts[0].print();
+            //contacts[1].print();
 
-            var contacts2 = from l in File.ReadAllLines(@"C:/Users/duanp/Desktop/enterprise_apps_interview_data.csv").Skip(1)
-                        let x = l.Split(new[] { ',' })
-                        select new ContactRecord
-                        {
-                            FirstName = x[2],
-                            LastName = x[3],
-                            Street = x[7],
-                            City = x[4],
-                            Province = x[6],
-                            PostalCode = x[8],
-                            Country = x[5]
-                        };
+            //string inputFileName = "C:/Users/duanp/Desktop/enterprise_apps_interview_data.csv";
+            string inputFileName = "C:/Users/duanp/Desktop/in.csv";
+            //var contacts2 = from l in File.ReadAllLines(inputFileName).Skip(1)
+            //            let x = l.Split(new[] { ',' })
+            //            select new ContactRecord
+            //            {
+            //                FirstName = x[2],
+            //                LastName = x[3],
+            //                Street = x[7],
+            //                City = x[4],
+            //                Province = x[6],
+            //                PostalCode = x[8],
+            //                Country = x[5]
+            //            };
 
             // print the first record
-            IEnumerator<ContactRecord> enumerator = contacts2.GetEnumerator();
-            enumerator.MoveNext();
-            enumerator.Current.print();
+            //IEnumerator<ContactRecord> enumerator = contacts2.GetEnumerator();
+            //enumerator.MoveNext();
+            //enumerator.Current.print();
 
-            List<ContactRecord> contactList = contacts2.ToList();
+            //List<ContactRecord> contactList = contacts2.ToList();
+
+            List<ContactRecord> contactList = new List<ContactRecord>();
+            List<string> columns = new List<string>();
+            using (var reader = new CsvFileReader(inputFileName))
+            {
+                while (reader.ReadRow(columns))
+                {
+                    contactList.Add(new ContactRecord(columns[2], columns[3], columns[7], columns[4],
+                        columns[6], columns[8], columns[5]));
+                }
+            }
+
+            // write original data to a new CSV file
+            using (CsvFileWriter writerA = new CsvFileWriter("C:/Users/duanp/Desktop/in_orig.csv"))
+            {
+                foreach (ContactRecord c in contactList)
+                {
+                    columns = c.GetFields().ToList();
+                    writerA.WriteRow(columns);
+                }
+            }
+
             corrector.ApplyRules(contactList); // contactList is changed, but contacts2 is not.
 
-            CsvFileWriter writer = new CsvFileWriter("C:/Users/duanp/Desktop/out.csv");
-            foreach (ContactRecord c in contactList)
+            // write the changed data to a new CSV file
+            using (CsvFileWriter writer = new CsvFileWriter("C:/Users/duanp/Desktop/out.csv"))
             {
-                List<string> columns = c.GetFields().ToList();
-                writer.WriteRow(columns);
+                foreach (ContactRecord c in contactList)
+                {
+                    columns = c.GetFields().ToList();
+                    writer.WriteRow(columns);
+                }
             }
         }
     }

@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 
+// http://www.blackbeltcoder.com/Articles/files/reading-and-writing-csv-files-in-c
+
 namespace ConsoleApp1
 {
     /// <summary>
