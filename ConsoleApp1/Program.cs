@@ -24,16 +24,16 @@ namespace ConsoleApp1
             expander.Add("Rd.", "Road");
             corrector.AddRule(expander);
 
-            string inputFileName = "C:/Users/duanp/Desktop/enterprise_apps_interview_data.csv";
-            //string inputFileName = "C:/Users/duanp/Desktop/in.csv";
+            string inputFileName = "in.csv";
+            //string inputFileName = "test.csv";
             List<ContactRecord> contactList = new List<ContactRecord>();
             ReadFromCsvFile(inputFileName, contactList);
 
-            WriteToCsvFile("C:/Users/duanp/Desktop/in_orig.csv", contactList);
+            WriteToCsvFile("in_orig.csv", contactList);
 
             corrector.ApplyRules(contactList); // contactList is changed
 
-            WriteToCsvFile("C:/Users/duanp/Desktop/out.csv", contactList);
+            WriteToCsvFile("out.csv", contactList);
         }
 
         static void ReadFromCsvFile(string filePath, List<ContactRecord> contactList)
