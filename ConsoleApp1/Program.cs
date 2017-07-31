@@ -23,8 +23,8 @@ namespace ConsoleApp1
             expander.Add("Ave", "Avenue");
             expander.Add("Rd.", "Road");
             corrector.AddRule(expander);
-            StreetNameCleaner streetCleaner = new StreetNameCleaner();
-            corrector.AddRule(streetCleaner);
+            corrector.AddRule(new StreetNameCleaner());
+            corrector.AddRule(new PostalCodeFormatter());
 
             string inputFileName = "in.csv";
             //string inputFileName = "test.csv";

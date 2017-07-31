@@ -30,8 +30,8 @@ line 1677: Trois-RiviÃ¨res => Trois-Rivières, Québec
 ** Approximate String Matching
 https://en.wikipedia.org/wiki/Approximate_string_matching
 https://fuzzystringmatching.codeplex.com/SourceControl/latest#WpfApplication4/FuzzyString/FuzzyString.cs
-* TODO Remove "," before "Street" and "Road"
-* TODO Postal Code formatter
+* DONE Remove "," before "Street" and "Road"
+* DONE Postal Code formatter
   - Ensure a space in Canadian postal codes
   - UPPERCASE
 * TODO Province abbreviation

@@ -160,4 +160,31 @@ namespace ConsoleApp1
             return Regex.Replace(s, pattern, replacement);
         }
     }
+
+    class PostalCodeFormatter : CorrectorRule
+    {
+        public override void ApplyOn(ContactRecord contact)
+        {
+            contact.PostalCode = FormatPostalCode(contact.PostalCode);
+        }
+
+        static string FormatPostalCode(string p)
+        {
+            if (p.Equals(String.Empty))
+            {
+                return p;
+            }
+
+            string s = p.ToUpper();
+            if (Regex.IsMatch(s, "[A-Z]") && s.Length > 3)
+            {
+                int spaceCharIndex = s.IndexOf(' ');
+                if (spaceCharIndex == -1) // if no Space char in it
+                {
+                    s = s.Insert(3, " ");
+                }
+            }
+            return s;
+        }
+    }
 }
